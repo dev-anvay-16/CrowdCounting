@@ -54,10 +54,18 @@
     const url = `/count_stream/${id}`;
     console.log(url);
     xhr.open("GET", url);
+    xhr.send();
 
     const change = document.getElementById(element._id);
-    const message = xhr.responseText;
-    console.log("Hello " + message);
+
+    const display = () => {
+      const message = xhr.responseText;
+      const l = message.toString();
+
+      change.textContent = `Count :  ${l ? l[l.length - 1] : 0}`;
+    };
+
+    setInterval(display, 100);
   });
 </script>
 
