@@ -1,0 +1,32 @@
+{% include "head.html" %}
+
+<link rel="stylesheet" href="{{url_for('static',filename = 'CSS/base.css')}}" />
+<link rel="stylesheet" href="{{url_for('static',filename = 'CSS/home.css')}}" />
+<script
+  src="{{url_for('static',filename = 'JavaScript/home.js')}}"
+  defer
+></script>
+<script
+  src="{{url_for('static',filename = 'JavaScript/base.js')}}"
+  defer
+></script>
+<title>Home</title>
+
+{% include "navigation.html" %}
+
+<main class="container">
+  {% if 'user' not in session: %}
+  <h1>All features are locked please Sign In to continue</h1>
+  {% else %}
+  <h1>All features are unlocked</h1>
+  <h1>Click on the left icon to expand side drawer and access all routes</h1>
+  {% endif %}
+
+  <!-- {% if login %} -->
+  <!-- <h1>Click on the left icon to expand side drawer and access all routes</h1>
+  <!-- {% else %} -->
+  <!--<h1>All features are locked please Sign In to continue</h1> -->
+  <!-- {% endif %} -->
+</main>
+
+{% include "end.html" %}

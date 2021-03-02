@@ -1,0 +1,64 @@
+{% include "head.html" %}
+
+<link rel="stylesheet" href="{{url_for('static',filename = 'CSS/base.css')}}" />
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename = 'CSS/config.css')}}"
+/>
+<script
+  src="{{url_for('static',filename = 'JavaScript/home.js')}}"
+  defer
+></script>
+<script
+  src="{{url_for('static',filename = 'JavaScript/base.js')}}"
+  defer
+></script>
+<title>Home</title>
+
+{% include "navigation.html" %}
+
+<main class="container">
+  {% if not allCameras %}
+
+  <h1>No Configured Camera available</h1>
+
+  {% else %}
+  <h1 class="big-heading">Camera Configuration</h1>
+  <div class="allGrids">
+    {% for camera in allCameras %}
+
+    <div class="grid">
+      <img src="{{ url_for('views.video_feed' , id = camera.get('_id') ) }}" />
+      <div class="details">
+        <h1>{{ camera.get('ip') }}</h1>
+        <br />
+        <h3>{{ camera.get('CameraName') }}</h3>
+        <h4 id="{{camera.get('_id')}}"></h4>
+        <br />
+      </div>
+      <!-- <a href="/config/{{ camera.get('_id') }}">Click Me</a> -->
+    </div>
+
+    {% endfor %}
+  </div>
+
+  {% endif %}
+</main>
+
+<script>
+  const list = JSON.parse(`{{allCameras | tojson | safe}}`);
+
+  list.forEach(element => {
+    const xhr = new XMLHttpRequest();
+    const id = String(element._id);
+    const url = `/count_stream/${id}`;
+    console.log(url);
+    xhr.open("GET", url);
+
+    const change = document.getElementById(element._id);
+    const message = xhr.responseText;
+    console.log("Hello " + message);
+  });
+</script>
+
+{% include "end.html" %}

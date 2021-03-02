@@ -1,0 +1,172 @@
+.addCamera{
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    height: 50px;
+    width: 50px;
+    background-color: aliceblue;
+    border: 4px solid #007dfc;
+    border-radius: 50%;
+    display: flex;
+    align-items:center ;
+    justify-content: center;
+    z-index: 90;
+    box-sizing: content-box;
+    
+}
+
+.addCamera:hover{
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotate(0deg) scale(1);
+    }
+    50%{
+        transform: rotate(90deg) scale(1.2);
+    }
+    100%{
+        transform: rotate(180deg) scale(1);
+    }
+
+}
+
+#add{
+    font-size: 25px;
+    color: #131313;
+}
+
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+   
+    background-color: rgba(0,0,0,0.7);
+    z-index: 450;
+    transform: translateY(-100%);
+    
+  
+}
+
+.addForm{
+    min-height: 100px;
+    width: 40%;
+    background-color: aliceblue;
+    opacity: 0;
+    transform: translateY(-100vh) translateX(-50%);
+    transition: all 0.3s ease-out;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    border-radius: 5px;
+}
+
+.FormOpen{
+    transform: translateY(0%) translateX(-50%);
+    opacity: 1;
+}
+
+.closedModal{
+    transform: translateY(0%) 
+}
+
+.container{
+   
+   min-height: 100px;
+    width: 90%;
+    
+    margin: 5rem auto;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    /* box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 12px -5px rgb(0 172 193 / 46%); */
+}
+
+.big-heading{
+    font-size: 40px;
+}
+
+.addCamForm{
+    width: 50%;
+    margin: 1rem auto;
+}
+
+.addCamForm input{
+    outline: none;
+    border: 1px solid #007dfc;
+    padding: 0.5rem 1rem;
+}
+
+
+.allGrids{
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    
+      
+}
+
+.grid{
+    height: 360px;
+    width: 640px;
+    border: 2px solid #007dfc;
+    margin: 1rem;
+   justify-self: center;  
+   display: flex;
+   justify-content:space-around;
+   flex-direction: column;
+   align-items: center;
+   font-size: 3rem;
+   color: #007dfc;
+   position: relative;
+}
+
+.grid h1{
+    font-size: 19px;
+}
+
+.grid a{
+   
+    color: #007dfc;
+    font-size: 16px;
+   
+}
+
+
+.last{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 2rem;
+    color: #007dfc;
+}
+
+.cross{
+    display: none;
+    font-size: 1.5rem;
+    color: #121212;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    
+}
+
+.grid:hover + .cross{
+    display: none;
+}
+
+.boundary{
+    position: absolute;
+    
+}
+

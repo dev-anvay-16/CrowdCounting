@@ -1,0 +1,66 @@
+.allGrids{
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    
+      
+}
+
+.grid{
+    min-height: 360px;
+    min-width: 640px;
+    border: 2px solid #007dfc;
+    margin: 1rem;
+   justify-self: center;  
+   display: flex;
+   justify-content:center;
+   align-items: center;
+   font-size: 3rem;
+   color: #007dfc;
+   position: relative;
+}
+
+
+.grid a{
+    position: absolute;
+    color: #007dfc;
+    font-size: 16px;
+    bottom: 10%;
+}
+
+.grid .details{
+    margin: 5rem;
+    font-size: 20px;
+}
+
+
+
+
+.last{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 2rem;
+    color: #007dfc;
+}
+
+.cross{
+    display: none;
+    font-size: 1.5rem;
+    color: #121212;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    
+}
+
+.grid:hover + .cross{
+    display: none;
+}
+
+.boundary{
+    position: absolute;
+    
+}
+
