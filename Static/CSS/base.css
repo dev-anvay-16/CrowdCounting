@@ -11,6 +11,7 @@
 
 body{
     background-color: #eeeeee;
+    position: relative;
   
 }
 
@@ -28,6 +29,7 @@ header{
     align-items: center;
     color: aliceblue;
     box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 12px -5px rgb(43 43 43 / 46%);
+    z-index: 100;
    
 }
 

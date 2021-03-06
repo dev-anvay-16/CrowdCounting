@@ -1,4 +1,5 @@
 .idea
 /venv
 /checkpoints
+/static/video
 *.weights
