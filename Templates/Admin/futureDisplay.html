@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{url_for('static',filename = 'CSS/base.css')}}" />
 <link
   rel="stylesheet"
-  href="{{url_for('static',filename = 'CSS/config.css')}}"
+  href="{{url_for('static',filename = 'CSS/display.css')}}"
 />
 <script
   src="{{url_for('static',filename = 'JavaScript/home.js')}}"
@@ -23,18 +23,30 @@
   <h1>No Configured Camera available</h1>
 
   {% else %}
-  <h1 class="big-heading">Camera Configuration</h1>
+  <div class="heading">
+    <h1>Display</h1>
+    <div class="totalCount">
+      <i class="fas fa-male"></i>
+      <span id="total">Total Count - 0</span>
+    </div>
+  </div>
+  <div class="line-breaker"></div>
   <div class="allGrids">
     {% for camera in allCameras %}
 
     <div class="grid">
-      <img src="{{ url_for('views.video_feed' , id = camera.get('_id') ) }}" />
-      <div class="details">
-        <h1>{{ camera.get('ip') }}</h1>
-        <br />
-        <h3>{{ camera.get('CameraName') }}</h3>
-        <h4 id="{{camera.get('_id')}}"></h4>
-        <br />
+      <div class="Live">
+        <div class="icon_live"></div>
+        <p>{{camera.get('CameraName')}}</p>
+      </div>
+      <div class="image">
+        <img
+          src="{{ url_for('views.video_feed' , id = camera.get('_id') ) }}"
+        />
+      </div>
+
+      <div class="count">
+        <p id="{{camera.get('_id')}}"></p>
       </div>
       <!-- <a href="/config/{{ camera.get('_id') }}">Click Me</a> -->
     </div>
@@ -44,7 +56,6 @@
 
   {% endif %}
 </main>
-
 <script>
   const list = JSON.parse(`{{allCameras | tojson | safe}}`);
 

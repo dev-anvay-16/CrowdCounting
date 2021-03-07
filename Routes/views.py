@@ -14,7 +14,13 @@ views = Blueprint('views', __name__)
 
 camera = mongo.db.cameraConfiguration
 
-thread_dict = {}
+thread_dict = {
+
+    
+}
+
+
+
 
 @views.route('/', methods=['GET'])
 def home():
@@ -159,7 +165,7 @@ def cameraConfig(cameraId):
         updatedCamThread  = Camera(ip= updateCam.get("ip") , name = updateCam.get("_id") , lock =  threading.Lock(), outputFrame_camera= None , configured= updateCam.get('configured'), cord1= updateCam.get('fc'), cord2= updateCam.get('sc'))
         thread_dict[updateCam.get('_id')] = updatedCamThread
         updatedCamThread.start()
-        return redirect('/')
+        return redirect('/config')
 
 
 @views.route("/delete/<id>" )
