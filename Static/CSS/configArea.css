@@ -152,6 +152,10 @@
     margin: 1rem 0;
 }
 
+.heading{
+    font-weight: 500;
+}
+
 
 .grid{
     height: 190px;
@@ -167,7 +171,9 @@
    position: relative;
 }
 
-
+.note{
+    font-weight: 600;
+}
 
 
 
@@ -183,13 +189,15 @@
 
 .general_details h4 {
     margin: 1rem 1rem 0;
-
+    font-weight: 600;
     
     font-size: 17px;
 }
 
 .general_details h6{
     margin: 1rem 1rem 0;
+    font-weight: 600;
+
     font-size: 15px;
 }
 

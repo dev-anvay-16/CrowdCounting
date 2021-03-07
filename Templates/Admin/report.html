@@ -1,7 +1,10 @@
 {% include "head.html" %}
 
 <link rel="stylesheet" href="{{url_for('static',filename = 'CSS/base.css')}}" />
-<link rel="stylesheet" href="{{url_for('static',filename = 'CSS/home.css')}}" />
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename = 'CSS/report.css')}}"
+/>
 
 <script
   src="{{url_for('static',filename = 'JavaScript/base.js')}}"
@@ -9,26 +12,11 @@
 ></script>
 <title>Home</title>
 
-{% include "navigation.html" %} {% if session['logged_in'] %}
-
-<div id="backdrop" class="backdrop"></div>
-<div class="modal">
-  <div class="addForm">
-    <form action="">
-      <h1>Form</h1>
-    </form>
-  </div>
-</div>
-
-<div class="addCamera" id="addCamera">
-  <i class="fas fa-plus" id="add"></i>
-</div>
-
-{% endif %}
+{% include "navigation.html" %} {% if session['logged_in'] %} {% endif %}
 
 <main class="container">
   {% if session['logged_in'] %}
-  <h2>Report</h2>
+  <h2>The work on this page hasn't been started yet.</h2>
   {% endif %}
 </main>
 

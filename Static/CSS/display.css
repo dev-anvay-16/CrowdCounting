@@ -33,8 +33,16 @@ min-height: 100px;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    
 }
 
+.heading h1{
+    font-weight: 600;
+}
+
+.heading span{
+    font-weight: 600;
+}
 
 
 .grid{

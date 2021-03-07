@@ -21,7 +21,9 @@
   <div class="config">
     <div class="cameraDisplay" id="cameraDisplay">
       <!-- <img src="{{url_for('static',filename = 'images/bg1.jpg')}}" alt="" /> -->
-      <h1 style="color: #007dfc; text-align: center">{{cam.get('ip')}}</h1>
+      <h1 style="color: #007dfc; text-align: center; font-weight: 600">
+        {{cam.get('ip')}}
+      </h1>
       <img src="{{ url_for('views.video_feed' , id = cam.get('_id') ) }}" />
       <div class="draw" id="draw"></div>
       <!-- <span id="pseudoDraw" ></span> -->

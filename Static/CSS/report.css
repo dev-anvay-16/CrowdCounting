@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: auto;
+}
+
+.container h2{
+    font-weight: 600;
+}
