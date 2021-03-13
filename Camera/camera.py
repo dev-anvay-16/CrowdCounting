@@ -100,10 +100,10 @@ class Camera(threading.Thread):
             frame = imutils.resize(frame, width=720 , height=480)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_num += 1
-            dsize = (720,480);
+            dsize = (720,480)
             frame_size = frame.shape[:2]
             image_data = cv2.resize(frame, (input_size, input_size))
-            image_data = image_data / 255.
+            image_data = image_data / 255
             image_data = image_data[np.newaxis, ...].astype(np.float32)
             start_time = time.time()
 

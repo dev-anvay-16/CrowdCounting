@@ -20,8 +20,8 @@
         <div>
            {% with messages = get_flashed_messages(with_categories = true) %} {% if
         messages %} {% for category,message in messages %}
-        <div class = "error">
-          <p>{{message}}</p>
+        <div class=" {{ 'error' if category=='error' else 'error green'}}">
+          <p>{{ message }}</p>
         </div>
         {% endfor %} {% endif %} {% endwith %}
             <div class="input-line one">

@@ -134,7 +134,7 @@ form {
     
 }
 
-.error p {
+.error  {
     font-size: 0.8rem;
     font-style: italic;
     font-weight: 400;
@@ -144,6 +144,11 @@ form {
      pointer-events: none;
      background-color:#f05454;
 }
+
+.green{
+    background-color: #54e346;
+}
+
 
 /* 
 .input-line:before,
