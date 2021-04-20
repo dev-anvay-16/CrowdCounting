@@ -4,8 +4,17 @@ const url = `/report-data`;
 xhr.open("GET", url);
 xhr.responseType = 'json'
 xhr.send();
+const loading = document.createElement('div');
+
+let innerHtmlForReport = `<div class="loader">Loading...</div>`
 
 
+xhr.onprogress = event => {
+
+  
+  loading.innerHTML = innerHtmlForReport
+  main.appendChild(loading)
+}
 
 xhr.onload = event => {
   console.log(`Received ${event.loaded} of ${event.total}`)
@@ -27,7 +36,7 @@ xhr.onload = event => {
   
   const videoFeedUrl = `video_feed/${cameraData._id}`
   
-  const innerHtmlForReport = `
+   innerHtmlForReport = `
    
     
       <div class="titleAndSelector">
@@ -84,9 +93,11 @@ xhr.onload = event => {
   
     `;
   
-  chartSection.innerHTML = innerHtmlForReport;
+    chartSection.innerHTML = innerHtmlForReport;
+    
+    loading.replaceWith(chartSection);
   
-  main.appendChild(chartSection);
+  // main.appendChild(chartSection);
 
     const currentGraph = document.getElementById(`${cameraData._id}-graph`).getContext("2d");
     const TotalCount = document.getElementById(`${cameraData._id}-totalCount`);

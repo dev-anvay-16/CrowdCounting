@@ -162,6 +162,7 @@ def cameraConfig(cameraId):
         }
         updateCam['configured'] = True
         updateCam['CameraName'] = data.get('cameraName')
+        updateCam['ip'] = data.get('IP')
         
         
         #print(updateCam)
