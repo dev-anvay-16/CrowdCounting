@@ -11,7 +11,8 @@ allVideoOptions.forEach(preview => {
         const target = e.target;
 
         videoContainer.load();
-        videoContainer.setAttribute('controls',true)
+        videoContainer.setAttribute('controls', true)
+        
         videoContainer.play();
         
         allVideoOptions.forEach(p => {

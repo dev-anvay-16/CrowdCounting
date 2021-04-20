@@ -7,6 +7,7 @@ from Database.mongodb import mongo
 from werkzeug.utils import redirect
 from Camera.camera import Camera
 import threading
+import json
 
 import uuid
 
@@ -64,6 +65,12 @@ def report():
         
     return redirect('/')
 
+@views.route('/report-data')
+def reportData():
+    if 'user' in session:
+        configuredCameras = list(camera.find({"userId": session['user'].get('_id') , "configured" : True}))
+        json_data = json.dumps(configuredCameras)
+        return jsonify(json_data)
 
 @views.route('/config' , methods = ["POST","GET"])
 def config():

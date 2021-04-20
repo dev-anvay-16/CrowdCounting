@@ -5,14 +5,14 @@
   rel="stylesheet"
   href="{{url_for('static',filename = 'CSS/report.css')}}"
 />
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
-  rel="stylesheet"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
 
 <script
   src="{{url_for('static',filename = 'JavaScript/base.js')}}"
+  defer
+></script>
+<script
+  src="{{url_for('static',filename = 'JavaScript/report.js')}}"
   defer
 ></script>
 
@@ -21,33 +21,9 @@
 {% include "navigation.html" %} {% if session['logged_in'] %} {% endif %}
 
 <main class="container">
-  {% if session['logged_in'] %}
-  <div class="heading">
-    <h1>Report</h1>
-  </div>
-
-  <div class="line-breaker"></div>
-
-  <div class="chart-section">
-    {% for graph in graphs %}
-    <div class="chartWithInfo">
-      <div class="chart">
-        <canvas id="{{graph.get('_id')}}"></canvas>
-      </div>
-      <div class="data">
-        <h3>{{graph.get('CameraName')}}</h3>
-        <br />
-        <p>X - Axis : Time(in minutes)</p>
-        <br />
-        <p>Y - Axis : Count</p>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-
-  {% endif %}
+  <div class="chart-section"></div>
 </main>
-<script>
+<!-- <script>
   const graphs = JSON.parse(`{{graphs | tojson | safe}}`);
 
   const max_size = 8;
@@ -167,6 +143,6 @@
     //setInterval(display, 3000);
   });
   //setInterval(sum, 100);
-</script>
+</script> -->
 
 {% include "end.html" %}
