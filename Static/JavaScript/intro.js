@@ -21,13 +21,8 @@ allVideoOptions.forEach(preview => {
                 p.style.color = "#232D39";
             }
         })
-
         preview.style.color = "#007dfc";
         
-        
-       
-        
-
 })
 })
 

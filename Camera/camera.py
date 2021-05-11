@@ -110,6 +110,7 @@ class Camera(threading.Thread):
         config.gpu_options.allow_growth = True
         session = InteractiveSession(config=config)
         # self.ip = 'http://192.168.0.100:8080'
+       
         vs_1 = VideoStream(f'http://{self.ip}:8080/video').start()
         time.sleep(2.0)
         total = 0

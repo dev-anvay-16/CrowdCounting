@@ -207,7 +207,7 @@ xhr.onload = event => {
                     padding: 20,
                 },
                 min: 0,
-                suggestedMax : 100,
+                suggestedMax : 10,
                 title: {
                     text: "Count",
                     display: true,
@@ -284,7 +284,8 @@ xhr.onload = event => {
       const data = JSON.parse(event.data);
       totalCountArray[index] = data.count;
       CurrentCount.textContent = data.count
-      current = data.count
+      current = data.count;
+      TotalCount.textContent = sum();
     };
 
     graphSource.onmessage = event => {
@@ -308,7 +309,7 @@ xhr.onload = event => {
             average = 0
             prevTime = new Date(new Date().getTime() + 10 * 1000).toTimeString().toString().slice(0, 8);
         }
-        TotalCount.textContent = sum();
+       
         if (current > max) {
             max = current;
         }

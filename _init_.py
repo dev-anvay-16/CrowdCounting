@@ -20,7 +20,7 @@ def create_app():
                 template_folder='./Templates')
     app.config['SECRET_KEY'] = 'my secret'
 
-    app.config['MONGO_URI'] = "mongodb+srv://anvay16:condensed@shop.tbyec.mongodb.net/CrowdCounting?retryWrites=true&w=majority"
+    app.config['MONGO_URI'] = "mongodb+srv://anvay16:condensed@shop.tbyec.mongodb.net/CrowdCounting?retryWrites=true&w=majority&tls=true&tlsAllowInvalidCertificates=true"
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = -1
     initialize_db(app)
     
