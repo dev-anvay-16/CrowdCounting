@@ -20,6 +20,11 @@ xhr.onload = event => {
   console.log(`Received ${event.loaded} of ${event.total}`)
   const camerasData = JSON.parse(xhr.response);
   console.log(camerasData)
+  camerasData.push({
+    _id: "total-16-may",
+    ip: "_ _ _._ _ _._ _._ _",
+    CameraName : "Total-Count-Graph"
+  })
  
   const max_size = 8;
   const totalCountArray = new Array(length).fill(0);
@@ -29,12 +34,34 @@ xhr.onload = event => {
     return s;
   };
 
+  console.log("later",camerasData)
+
   camerasData.forEach((cameraData, index) => {
 
   const chartSection = document.createElement('div');
     chartSection.setAttribute('class', 'Chart');
   
-  const videoFeedUrl = `video_feed/${cameraData._id}`
+    const videoFeedUrl = `video_feed/${cameraData._id}`
+    
+    const dataToBeAdded = [
+
+      `<div class = "totalWindow">
+        <h4>Total Count</h4>
+        <p>No Live Footage Available for this window</p>
+      </div>`
+      ,
+      `<div class="TotalCount">
+      <p>Total Count</p>
+      <h3 id="${cameraData._id}-totalCount">0</h3>
+    </div>`
+      
+    ];
+
+    if (index !== camerasData.length - 1) {
+      dataToBeAdded[0] = ` <img 
+          src= ${videoFeedUrl}
+         alt="" class="image" />`;
+    }
   
    innerHtmlForReport = `
    
@@ -47,9 +74,9 @@ xhr.onload = event => {
         <div class="selector">
           <div class="optionChoose">
             <ul>
-              <li class="option" data-option="week">Week</li>
-              <li class="option" data-option="day">Day</li>
-              <li class="option" data-option="live">Live</li>
+              <li class="option-${cameraData._id} option " data-option="${cameraData._id}-week">Week</li>
+              <li class="option-${cameraData._id} option" data-option="${cameraData._id}-day">Day</li>
+              <li class="option-${cameraData._id} option" data-option="${cameraData._id}-live">Live</li>
             </ul>
           </div>
         </div>
@@ -63,9 +90,7 @@ xhr.onload = event => {
           </div>
 
           <p id="ip">${cameraData.ip}</p>
-          <img 
-          src= ${videoFeedUrl}
-         alt="" class="image" />
+          ${dataToBeAdded[0]}
         </div>
         <div class="graph">
           <div class="canvas"><canvas id="${cameraData._id}-graph"></canvas></div>
@@ -73,7 +98,7 @@ xhr.onload = event => {
       </div>
       <div class="ListCount">
         <div class="CurrCount">
-          <p>Current Count</p>
+          <p>${index !== camerasData.length - 1 ? 'Current Count' : 'Total Count'}</p>
           <h3 id= "${cameraData._id}-currCount">0</h3>
         </div>
         <div class="AverageCount">
@@ -84,15 +109,11 @@ xhr.onload = event => {
           <p>Max Count</p>
           <h3 id= "${cameraData._id}-maxCount">0</h3>
         </div>
-        <div class="TotalCount">
-          <p>Total Count</p>
-          <h3 id= "${cameraData._id}-totalCount">0</h3>
-        </div>
-        
+        ${index !== camerasData.length - 1 ? dataToBeAdded[1] : ''}
       </div>
-   
-  
     `;
+
+    
   
     chartSection.innerHTML = innerHtmlForReport;
     
@@ -112,7 +133,7 @@ xhr.onload = event => {
   gradient.addColorStop(0.5, 'rgba(0,125,252,0.1)');
   gradient.addColorStop(1, 'rgba(18,18,18,0)');
 
-  let prevTime = new Date(new Date().getTime() + 60 * 1000)
+  let prevTime = new Date(new Date().getTime() + 10 * 1000)
         .toTimeString()
         .toString()
       .slice(0, 8);
@@ -267,39 +288,57 @@ xhr.onload = event => {
           },
         },
       },
-  };
+    };
+     let live = false;
+      let current = 0;
+      let max = 0;
+    let average = 0;
+    const updatedData = []
+      const updatedLabels = []
   
   const GRAPH = new Chart(currentGraph, config);
-    
-    const countSource = new EventSource(`/count_stream/${cameraData._id}`);
-    const graphSource = new EventSource(`/graph/${cameraData._id}`);
+    if (index !== camerasData.length - 1) {
+      const countSource = new EventSource(`/count_stream/${cameraData._id}`);
+      const graphSource = new EventSource(`/graph/${cameraData._id}`);
 
-    const updatedData = []
-    const updatedLabels = []
-    let live = false;
-    let current = 0;
-    let max = 0;
-    let average = 0;
+      
+     
     
-    countSource.onmessage = event => {
-      const data = JSON.parse(event.data);
-      totalCountArray[index] = data.count;
-      CurrentCount.textContent = data.count
-      current = data.count;
-      TotalCount.textContent = sum();
-    };
+      countSource.onmessage = event => {
+        const data = JSON.parse(event.data);
+        totalCountArray[index] = data.count;
+        CurrentCount.textContent = data.count
+        current = data.count;
+        TotalCount.textContent = sum();
+      };
 
-    graphSource.onmessage = event => {
-      const data = JSON.parse(event.data);
-      const currTime = new Date().toTimeString().toString().slice(0, 8);
-      updatedLabels.push(currTime)
-      updatedData.push(data.value)
+      graphSource.onmessage = event => {
+        const data = JSON.parse(event.data);
+        const currTime = new Date().toTimeString().toString().slice(0, 8);
+        updatedLabels.push(currTime)
+        updatedData.push(data.value)
         if (updatedData.length > max_size + 1) {
-            updatedLabels.shift();
-            updatedData.shift();
+          updatedLabels.shift();
+          updatedData.shift();
         }
-    };
-    
+      };
+    }
+    else {
+      setInterval(() => {
+         const currTime = new Date().toTimeString().toString().slice(0, 8);
+        updatedLabels.push(currTime)
+      updatedData.push(sum())
+        current = sum();
+        CurrentCount.textContent = current
+        if (updatedData.length > max_size + 1) {
+          console.log(updatedData.length)
+          updatedLabels.shift();
+          updatedData.shift();
+      }
+      },1000)
+     
+      
+    }
     
     const display = () => {
         average += current;
@@ -315,21 +354,23 @@ xhr.onload = event => {
             max = current;
         }
         MaxCount.textContent = max.toFixed(0);
-        if (live) {
+      if (live) {
+          
             config.data.labels = updatedLabels
             config.data.datasets[0].data =updatedData
             GRAPH.update();
         }
     };
   
-  const graphSwitch = document.querySelectorAll(`.option`);
+  const graphSwitch = document.querySelectorAll(`.option-${cameraData._id}`);
     
   setInterval(display, 1000)
 
   graphSwitch.forEach(ele => {
       ele.addEventListener('click', e => {
-        const target = e.target
-        if (e.target.dataset.option == "week") {
+        const target = e.target.dataset.option
+        if (e.target.dataset.option === `${cameraData._id}-week`) {
+          
           live = false
           config.data.datasets[0].data = []
           config.data.labels = []
@@ -337,10 +378,12 @@ xhr.onload = event => {
           config.data.labels = dummyGraphData.graphWeek.map(val =>  val.Day);
           GRAPH.update();
         }
-        else if (e.target.dataset.option == "live") {
+        else if (e.target.dataset.option === `${cameraData._id}-live`) {
+          
          live = true
         }
-        else if(e.target.dataset.option == "day") {
+        else if (e.target.dataset.option === `${cameraData._id}-day`) {
+          
           live = false
           config.data.datasets[0].data = []
           config.data.labels = []
@@ -351,8 +394,8 @@ xhr.onload = event => {
         }
 
         graphSwitch.forEach(p => {
-          console.log(p,target)
-          if (p !== target) {
+          
+          if (p.getAttribute('data-option') !== target) {
                 p.style.color = "ALICEBLUE";
             }
         })

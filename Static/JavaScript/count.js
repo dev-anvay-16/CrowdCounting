@@ -13,10 +13,10 @@ fetch('/cameras-data', {
     }).
     then(result => {
         const cameras = JSON.parse(result);
-        console.log(cameras)
+        
 
         cameras.forEach(cameraData => {
-            
+            let prevCount = -1;
             let data;
             let added = false;
             const threshold = cameraData.threshold;
@@ -59,15 +59,19 @@ fetch('/cameras-data', {
                 const dataCount = JSON.parse(event.data);
                 const count = dataCount.count;
                 const message = `Count of ${cameraData.CameraName} has exceeded its limitting value`;
-                    if (count >= threshold) {
-                        if (!data && !added) {
+                    if (count >= threshold ) {
+                        if (!data && !added && prevCount !== count) {
                             data = addDivison(message);
                         }
                     trigger(data);
                 }
-                    else{  
-                    removingChild(data)
+                    else {
+                        if (data && added) {
+                            removingChild(data)
+                        }
+                    
                 }
+                prevCount = count;
             };
             
         });

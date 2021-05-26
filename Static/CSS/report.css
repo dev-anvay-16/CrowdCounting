@@ -252,6 +252,30 @@
     
 }
 
+.totalWindow{
+    width: 355.5px;
+    height: 200px;
+    background-color: #121212;
+    color: aliceblue;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.totalWindow h4{
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+
+
+
 .loader {
   font-size: 10px;
   margin: 50px auto;
