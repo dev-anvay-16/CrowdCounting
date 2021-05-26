@@ -22,5 +22,8 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;900&display=swap"
       rel="stylesheet"
     />
+    {% if session['logged_in'] %}
+    <script src="{{url_for('static',filename = 'JavaScript/count.js')}}"></script>
+    {% endif %}
   </head>
 </html>

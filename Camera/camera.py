@@ -89,7 +89,7 @@ class Camera(threading.Thread):
             #     self.prevCount = self.currCount
                 jsonData = json.dumps({"count" : self.currCount})
                 yield (f"data:{jsonData}\n\n")
-                time.sleep(0.033)
+                time.sleep(0.33)
                 
             
         return

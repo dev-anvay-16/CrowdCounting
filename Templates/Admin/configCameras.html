@@ -24,10 +24,9 @@
       
       <input type="text" name="ip" id="ipGetter" placeholder="Enter IP Address"/>
       <input type="text" hidden name = "creationDateAndTime" id = "dt">
-      <br /><br />
-      
       <input type="text" name="CameraName" placeholder="Camera Name" />
-      <br /><br />
+      <input type="number" step="1" min="0" placeholder="Limit Count" name = "Threshold" />
+  
       <button type="submit" id="btn">Submit</button>
       <!-- <a type="submit" id="submitBtn">Click Me</a> -->
     </form>
@@ -81,7 +80,7 @@
             </h4>
             <h6 class="date">{{camera.get('createdAt')}}</h6>
             <h6>Status : {{ 'Configured' if camera.get('configured') else 'Not Configured'  }}</h6>
-            <h6>Current Count : 0</h6>
+            <!-- <h6>Current Count : 0</h6> -->
           </div>
           <div class="Buttonlinks">
             <a href="/config/{{ camera.get('_id') }}" class="blue">{{ 'Configure' if not camera.get('configured') else 'Edit' }} </a>

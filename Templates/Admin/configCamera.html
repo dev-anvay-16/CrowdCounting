@@ -48,6 +48,13 @@
 
           <label for="IP">Enter Camera IP : </label>
           <input type="text" name="IP" value="{{cam.get('ip')}}" />
+          <br /><br />
+          <label for="Threshold">Threshold (<em>Limiting Value</em>) : </label>
+          <input
+            type="text"
+            name="Threshold"
+            value="{{cam.get('threshold')}}"
+          />
         </fieldset>
 
         <!-- <fieldset class="dimensionChooser">
@@ -83,15 +90,43 @@
 
           <h4 id="Y">Y : 0</h4>
           <br /><br />
-          <h4 id="c1">1st Coordinate : (0 , 0)</h4>
+          <h4 id="c1">
+            1st Coordinate : ({{cam['fc']['x']}} , {{cam['fc']['y']}})
+          </h4>
           <br /><br />
-          <h4 id="c2">2nd Coordinate : (0 , 0)</h4>
+          <h4 id="c2">
+            2nd Coordinate : ({{cam['sc']['x']}} , {{cam['sc']['y']}})
+          </h4>
           <br /><br />
-          <input type="text" name="cord1x" id="cord1x" hidden />
-          <input type="text" name="cord1y" id="cord1y" hidden />
+          <input
+            type="text"
+            name="cord1x"
+            id="cord1x"
+            value="{{cam['fc']['x']}}"
+            hidden
+          />
+          <input
+            type="text"
+            name="cord1y"
+            id="cord1y"
+            value="{{cam['fc']['y']}}"
+            hidden
+          />
 
-          <input type="text" name="cord2x" id="cord2x" hidden />
-          <input type="text" name="cord2y" id="cord2y" hidden />
+          <input
+            type="text"
+            name="cord2x"
+            id="cord2x"
+            value="{{cam['sc']['x']}}"
+            hidden
+          />
+          <input
+            type="text"
+            name="cord2y"
+            id="cord2y"
+            value="{{cam['sc']['y']}}"
+            hidden
+          />
           <button id="reset" type="reset" class="reset">Reset</button>
         </fieldset>
 

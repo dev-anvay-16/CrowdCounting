@@ -65,7 +65,7 @@ def report():
         
     return redirect('/')
 
-@views.route('/report-data')
+@views.route('/cameras-data')
 def reportData():
     if 'user' in session:
         configuredCameras = list(camera.find({"userId": session['user'].get('_id') , "configured" : True}))
@@ -89,6 +89,7 @@ def config():
             'configured' : False,
             'createdAt' : request.form.get('creationDateAndTime'),
             'CameraName' : request.form.get('CameraName'),
+            'threshold' : int(request.form.get('Threshold')),
             'fc' : {
                 'x' : 0,
                 'y' : 0
@@ -147,6 +148,7 @@ def config():
 def cameraConfig(cameraId):
     if request.method == 'GET':
         selectedCamera = camera.find_one({"_id": cameraId})
+        print("CAM - ", selectedCamera)
         return render_template('Admin/configCamera.html', cam=selectedCamera)
 
     else:
@@ -163,18 +165,22 @@ def cameraConfig(cameraId):
         updateCam['configured'] = True
         updateCam['CameraName'] = data.get('cameraName')
         updateCam['ip'] = data.get('IP')
+        updateCam['threshold'] = int(data.get('Threshold'))
         
         
         #print(updateCam)
         camera.replace_one({'_id': cameraId}, updateCam)
         thread_dict.get(updateCam.get('_id')).terminate()
+        sleep(1)
         thread_dict.get(updateCam.get('_id')).join()
+        sleep(1)
 
 
 
         updatedCamThread  = Camera(ip= updateCam.get("ip") , name = updateCam.get("_id") , lock =  threading.Lock(), outputFrame_camera= None , configured= updateCam.get('configured'), cord1= updateCam.get('fc'), cord2= updateCam.get('sc'))
         thread_dict[updateCam.get('_id')] = updatedCamThread
         updatedCamThread.start()
+        sleep(1)
         return redirect('/config')
 
 @views.route("/delete/<id>" )
@@ -183,7 +189,9 @@ def delete(id):
     camera.delete_one({'_id' : id})
 
     thread_dict[delId.get('_id')].terminate()
+    sleep(1)
     thread_dict[delId.get('_id')].join()
+    sleep(1)
 
     del thread_dict[delId.get('_id')]
     return redirect('/config')

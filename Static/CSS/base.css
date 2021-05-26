@@ -92,20 +92,13 @@ header{
    
 }
 
-
-
 .logout a:hover{
    color : grey;
 }
 
-
-
 .Login:hover .logout{
     display: block;
 }
-
-
-
 
 nav{
     position: fixed;
@@ -226,12 +219,86 @@ nav{
 
 .sliderIcon i{
     font-size: 20px;
-   
 }
 
 .open{
     transform: translateX(0%);
 }
+
+
+#error-container{
+    position: fixed;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    min-height: 30vh;
+    z-index: 440;
+    
+}
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px 0;
+  padding: 7px;
+  border-radius: 3px 3px 3px 3px;
+  position: relative;
+}
+
+.warning-msg {
+    color: aliceblue;
+  background-color: #ff4646;
+  font-size: 17px;
+  animation: tb 0.5s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+.warning-msg i {
+    color : aliceblue;
+}
+
+@keyframes tb {
+   
+  from {
+    transform: translateY(-30px);
+    opacity: 0.4;        
+    }
+  to {
+    transform: translateY(0);
+    opacity: 1; 
+  }
+
+}
+
+.remove {
+    animation: bt 0.5s;
+}
+
+@keyframes bt {
+   
+  from {
+    transform: translateY(0);
+    opacity: 1;        
+    }
+  to {
+    transform: translateY(-30px);
+    opacity: 0; 
+  }
+
+}
+
+
+
+.last{
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 
 
 ::-webkit-scrollbar {

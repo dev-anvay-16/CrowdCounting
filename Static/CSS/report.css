@@ -78,7 +78,7 @@
     background-color: #2B2B2B;
     
     border-radius: 1px solid;
-    box-shadow: 0px 8px 16px 0px  rgb(0,0,0,1);
+    box-shadow: 1px 5px 50px 1px rgb(21 21 21);;
     box-sizing: border-box;
     border-radius: 20px;
 }
@@ -177,7 +177,7 @@
     width: 355.5px;
     height: 200px;
     margin: 2rem 0;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 1);
+    box-shadow: 1px 5px 50px 1px rgb(21 21 21);
 }
 
 
@@ -196,8 +196,6 @@
 }
 
 .canvas{
-    
- 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,15 +211,9 @@
 
 .ListCount{
     display: flex;
-    
     justify-content: space-between;
     margin: 3rem 2rem;
-    
-
     margin: 3rem 2rem; 
-
-
-   
 }
 
 .MaxCount,.AverageCount,.CurrCount,.TotalCount{

@@ -80,20 +80,22 @@
     font-weight: 600;
 }
 
-
 #cord h4{
     font-weight: 600;
 }
 
 
-
-
  label{
     font-weight: 600;
-    
 }
 
- legend{
+input{
+    background-color: transparent;
+    border : 2px solid #006cd8;
+    padding: 5px 10px;
+}
+
+legend{
     letter-spacing: 1px;
     padding: 0 1rem;
     font-weight: 600;  
@@ -157,6 +159,7 @@ span{
 
 input[type = 'range']{
     margin: 0 1rem;
+    
 }
 
 .angle{

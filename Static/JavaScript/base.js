@@ -2,7 +2,7 @@ const sliderbtn = document.getElementById('sliderbtn');
 const nav = document.getElementById('navigation');
 const icon = document.getElementById('icon');
 const time = document.getElementById('time')
- const dt = document.getElementById('dt')
+const dt = document.getElementById('dt')
 let open = false;
 
 sliderbtn.addEventListener('click', () => {
@@ -23,7 +23,6 @@ sliderbtn.addEventListener('click', () => {
    
 })
 
-
 const months = {
     1: "January",
     2: "February",
@@ -43,14 +42,10 @@ const timeFunc = () => {
     const newTime = new Date().toTimeString().toString().slice(0,8);
     time.textContent = newTime;
     if (dt) {
-         const d = new Date();
+    const d = new Date();
     const dime = `${d.getDate()} ${months[d.getMonth() + 1]} ${d.getFullYear()} ${newTime}`;
     dt.value = dime;
-    
     }
-   
-    
-
 }
 
 setInterval(timeFunc,1000)

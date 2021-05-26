@@ -1,26 +1,26 @@
 const main = document.querySelector('.chart-section')
 const xhr = new XMLHttpRequest();
-const url = `/report-data`;
+const url = `/cameras-data`;
 xhr.open("GET", url);
 xhr.responseType = 'json'
 xhr.send();
-const loading = document.createElement('div');
+// const loading = document.createElement('div');
 
-let innerHtmlForReport = `<div class="loader">Loading...</div>`
+// let innerHtmlForReport = `<div class="loader">Loading...</div>`
 
 
-xhr.onprogress = event => {
+// xhr.onprogress = event => {
 
   
-  loading.innerHTML = innerHtmlForReport
-  main.appendChild(loading)
-}
+//   loading.innerHTML = innerHtmlForReport
+//   main.appendChild(loading)
+// }
 
 xhr.onload = event => {
   console.log(`Received ${event.loaded} of ${event.total}`)
   const camerasData = JSON.parse(xhr.response);
   console.log(camerasData)
-
+ 
   const max_size = 8;
   const totalCountArray = new Array(length).fill(0);
 
@@ -88,6 +88,7 @@ xhr.onload = event => {
           <p>Total Count</p>
           <h3 id= "${cameraData._id}-totalCount">0</h3>
         </div>
+        
       </div>
    
   
@@ -95,9 +96,9 @@ xhr.onload = event => {
   
     chartSection.innerHTML = innerHtmlForReport;
     
-    loading.replaceWith(chartSection);
+    // loading.replaceWith(chartSection);
   
-  // main.appendChild(chartSection);
+   main.appendChild(chartSection);
 
     const currentGraph = document.getElementById(`${cameraData._id}-graph`).getContext("2d");
     const TotalCount = document.getElementById(`${cameraData._id}-totalCount`);
